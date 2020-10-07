@@ -1,0 +1,2 @@
+C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Debug\Ahorcado.exe
+C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Debug\Ahorcado.pdb
