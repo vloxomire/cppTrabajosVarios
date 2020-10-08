@@ -26,18 +26,18 @@ void imprimirPantalla(EstAhorcado& eA)
 	"\n	|	 @ ",
 	"	|    | ",
 	"	|   /| ",
-	"	|   /|\\",
+	"	|   /|]",
 	"	|    /  ",
-	"	|     \\"
+	"	|     ]"
 	};
 	std::string dibujoHorca[6]
 	{
-	"	╔--╗",
-	"	|",
-	"	|",
-	"	|",
-	"	|",
-	"	--------"
+	" ╔--╗",
+	" |",
+	" |",
+	" |",
+	" |",
+	"--------"
 	};
 	bool gano(false);
 	bool letraValida(false);
@@ -61,9 +61,31 @@ void imprimirPantalla(EstAhorcado& eA)
 		for (size_t i = 0; i < 6; i++)
 		{
 			std::cout << dibujoHorca[i];
-			if (intentos<i)
+			if (intentos>i)
 			{
-				dibujoHorca[i]= dibujoAhorcado[i];
+				switch (intentos)
+				{
+				case 1:
+					dibujoHorca[1] = " |   @";
+					break;
+				case 2:
+					dibujoHorca[2] = " |   |";
+					break;
+				case 3:
+					dibujoHorca[2] = " |  /|";
+					break;
+				case 4:
+					dibujoHorca[2] = " |  /|]";
+					break;
+				case 5:
+					dibujoHorca[3] = " |   /";
+					break;
+				case 6:
+					dibujoHorca[3] = " |   /]";
+					break;
+				default:
+					break;
+				}
 			}
 			
 			std::cout << '\n';
@@ -114,6 +136,18 @@ void imprimirPantalla(EstAhorcado& eA)
 			for (size_t i = 0; i < 5; i++)
 			{
 				std::cout<<eA.palabraABuscar[i];
+			}
+			std::cin.get();
+			std::cin.get();
+		}
+		else if (intentos > 6) 
+		{
+			std::cout << "Has perdido la partida\n";
+			std::cout << "La palabra era: \n";
+			gano = true;
+			for (size_t i = 0; i < 5; i++)
+			{
+				std::cout << eA.palabraABuscar[i];
 			}
 			std::cin.get();
 			std::cin.get();
