@@ -1,6 +1,5 @@
 ﻿  Ahorcado.cpp
-C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Ahorcado.cpp(9,2): warning C4566: el carácter representado por el nombre de carácter universal '\u2554' no se puede representar en la página de códigos actual (1252)
-C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Ahorcado.cpp(9,2): warning C4566: el carácter representado por el nombre de carácter universal '\u2557' no se puede representar en la página de códigos actual (1252)
-C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Ahorcado.cpp(11,2): warning C4129: ' ': secuencia de escape de carácter no reconocida
-C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Ahorcado.cpp(12,2): warning C4129: ' ': secuencia de escape de carácter no reconocida
+C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Ahorcado.cpp(35,2): warning C4566: el carácter representado por el nombre de carácter universal '\u2554' no se puede representar en la página de códigos actual (1252)
+C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Ahorcado.cpp(35,2): warning C4566: el carácter representado por el nombre de carácter universal '\u2557' no se puede representar en la página de códigos actual (1252)
+C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Ahorcado.cpp(64,16): warning C4018: '<': no coinciden signed/unsigned
   Ahorcado.vcxproj -> C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Debug\Ahorcado.exe
