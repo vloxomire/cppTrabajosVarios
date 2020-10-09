@@ -7,12 +7,12 @@ int main()
 	bool gano(false);
 	bool boolHayJuego(false);
 	const short indice(5);
-	short arrayDados[indice]{0};
+	//short arrayDados[indice]{0};
+	short arrayDados[indice]{ 2,2,3,3,3 };
 	short arrayContaNum[6]{ 0 };
-	short arrayContaJuego[5]{ 0 };
 	short arrayHayJuego[2]{ 0 };
 	TipoDeJuego arrayTipoDeJuego[6]{};
-	short arrayContaTipoJuego[6]{ 0 };
+	short arrayContaTipoJuego[5]{ 0 };
 	short aux(0);
 	srand(time(NULL));
 	
@@ -25,7 +25,7 @@ int main()
 
 		std::cout << "Tirando dados....\n";
 		//GENERANDO LA TIRADA
-		for (size_t i = 0; i < 5; i++)
+		/*for (size_t i = 0; i < 5; i++)
 		{
 			arrayDados[i] = rand() % 6 + 1;
 			std::cout << arrayDados[i] << ',';
@@ -46,7 +46,7 @@ int main()
 					arrayDados[k + 1] = aux;
 				}
 			}
-		}
+		}*/
 		//MOSTRAR
 		for (size_t i = 0; i < indice; i++)
 		{
@@ -113,15 +113,27 @@ int main()
 		{
 			arrayTipoDeJuego[2] = ESCALERA;
 		}
+		aux = 0;
 		//logica Full
-
-		for (size_t i = 0; i < 5; i++)
+		for (size_t i = 0; i < 6; i++)
 		{
-			if (arrayDados[i] == arrayDados[i + 1])
+			if (arrayContaNum[i] ==2)
 			{
 				aux++;
 			}
+			else if (arrayContaNum[i] == 3) 
+			{
+				aux +=2;
+			}
+			
 		}
+		if (aux==3)
+		{
+			arrayTipoDeJuego[2] = FULL;
+
+		}
+
+
 		//RECORRO EL ARRAY TIPO DE JUEGO
 		//si no hay
 		aux = 0;
@@ -129,27 +141,38 @@ int main()
 		{
 			if (arrayTipoDeJuego[i] != NOJUEGO)
 			{
-				aux++;
-				arrayHayJuego[1] = aux;
+				arrayHayJuego[1] +=1;
 				boolHayJuego = true;
+				switch (arrayTipoDeJuego[i]) 
+				{
+				case DOBLE:
+					arrayContaTipoJuego[0] += 1;
+					break;
+				case ESCALERA:
+					arrayContaTipoJuego[1] += 1;
+					break;
+				case FULL:
+					arrayContaTipoJuego[2] += 1;
+					break;
+				case POKER:
+					arrayContaTipoJuego[3] += 1;
+					break;
+				case GENERALA:
+					arrayContaTipoJuego[4] += 1;
+					break;
+				default:
+					break;
+				}
 			}
-		}
-		if (!boolHayJuego)
-		{
-			arrayHayJuego[0] += 1;
-		}
-		else 
-		{
-			//arrayHayJuego[1] += 1;
 		}
 		std::cout << "Juegos de la tirada ([" << arrayHayJuego[0] 
 			<< "] No hay juego | ["<<arrayHayJuego[1]<<"] hay un juego):\n";
 		std::cout << '\n';
-		std::cout << "Doble: " << arrayContaJuego[0] << '\n';
-		std::cout << "Escalera: " << arrayContaJuego[1] << '\n';
-		std::cout << "Full: " << arrayContaJuego[2] << '\n';
-		std::cout << "Poker: " << arrayContaJuego[3] << '\n';
-		std::cout << "generala: " << arrayContaJuego[4] << '\n';
+		std::cout << "Doble: " << arrayContaTipoJuego[0] << '\n';
+		std::cout << "Escalera: " << arrayContaTipoJuego[1] << '\n';
+		std::cout << "Full: " << arrayContaTipoJuego[2] << '\n';
+		std::cout << "Poker: " << arrayContaTipoJuego[3] << '\n';
+		std::cout << "generala: " << arrayContaTipoJuego[4] << '\n';
 
 		std::cout << "********************************************************\n";
 		std::cout << '\n';
