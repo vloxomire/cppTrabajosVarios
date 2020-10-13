@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado1.1\main.cpp(77,3): warning C4566: el carácter representado por el nombre de carácter universal '\u2554' no se puede representar en la página de códigos actual (1252)
+C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado1.1\main.cpp(77,3): warning C4566: el carácter representado por el nombre de carácter universal '\u2557' no se puede representar en la página de códigos actual (1252)
+C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado1.1\main.cpp(93,17): warning C4018: '>': no coinciden signed/unsigned
+  Ahorcado1.1.vcxproj -> C:\0-Cursos\C++\cppTrabajosVarios\Ahorcado\Debug\Ahorcado1.1.exe

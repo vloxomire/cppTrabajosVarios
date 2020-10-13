@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ahorcado", "Ahorcado.vcxproj", "{6D338559-854F-45BE-9B02-5FC0F8D06939}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ahorcado1.1", "..\Ahorcado1.1\Ahorcado1.1.vcxproj", "{803D4A83-8776-4F10-B509-113B0C9B58AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{6D338559-854F-45BE-9B02-5FC0F8D06939}.Release|x64.Build.0 = Release|x64
 		{6D338559-854F-45BE-9B02-5FC0F8D06939}.Release|x86.ActiveCfg = Release|Win32
 		{6D338559-854F-45BE-9B02-5FC0F8D06939}.Release|x86.Build.0 = Release|Win32
+		{803D4A83-8776-4F10-B509-113B0C9B58AC}.Debug|x64.ActiveCfg = Debug|x64
+		{803D4A83-8776-4F10-B509-113B0C9B58AC}.Debug|x64.Build.0 = Debug|x64
+		{803D4A83-8776-4F10-B509-113B0C9B58AC}.Debug|x86.ActiveCfg = Debug|Win32
+		{803D4A83-8776-4F10-B509-113B0C9B58AC}.Debug|x86.Build.0 = Debug|Win32
+		{803D4A83-8776-4F10-B509-113B0C9B58AC}.Release|x64.ActiveCfg = Release|x64
+		{803D4A83-8776-4F10-B509-113B0C9B58AC}.Release|x64.Build.0 = Release|x64
+		{803D4A83-8776-4F10-B509-113B0C9B58AC}.Release|x86.ActiveCfg = Release|Win32
+		{803D4A83-8776-4F10-B509-113B0C9B58AC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
