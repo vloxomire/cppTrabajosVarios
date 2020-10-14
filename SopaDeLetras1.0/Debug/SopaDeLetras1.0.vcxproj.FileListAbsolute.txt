@@ -1,0 +1,2 @@
+C:\0-Cursos\C++\cppTrabajosVarios\SopaDeLetras1.0\Debug\SopaDeLetras1.0.exe
+C:\0-Cursos\C++\cppTrabajosVarios\SopaDeLetras1.0\Debug\SopaDeLetras1.0.pdb

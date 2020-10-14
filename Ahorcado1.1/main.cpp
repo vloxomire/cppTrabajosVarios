@@ -5,24 +5,29 @@
 class Ahorcado
 {
 private:
-	struct EstructAhorcado
+
+	std::string m_palabraABuscar;
+	char m_arrayRespuesta[5]{' '};
+	std::string m_letrasInsertadas;
+	char m_letra;
+
+	struct StructTiempo
 	{
-		std::string palabraABuscar;
-		char arrayRespuesta[5];
-		std::string letrasInsertadas;
-		char letra;
-	};
-	EstructAhorcado strAho;
-	__time32_t tiempoCrudo;
-	struct tm nuevoTiempo;
-	char buffer[32];
-	errno_t errNum;
+		__time32_t tiempoCrudo;
+		struct tm nuevoTiempo;
+		char buffer[32];
+		errno_t errNum;
+	}st;
+
 
 public:
 	Ahorcado(std::string);
 	~Ahorcado();
 	void imprimirPantalla();
-	void chequeadorLetras(EstructAhorcado &eA);
+	void chequeadorLetras();
+	std::string GetPalabraBuscar();
+	char GetArrayRespuesta();
+	char GetLetra();
 };
 
 int main()
@@ -32,40 +37,35 @@ int main()
 	return 0;
 };
 
-Ahorcado::Ahorcado(std::string buscar)
+Ahorcado::Ahorcado(std::string buscar) :m_palabraABuscar{ buscar }
 {
 	std::cout << "Construyendo....... \\ \n";
 	//Esto es tiempo ch....
-	_time32(&tiempoCrudo);//Dame tiempo en seg
-	_localtime32_s(&nuevoTiempo, &tiempoCrudo);//Convierta el tiempo en forma estructura tm.
-	errNum = asctime_s(buffer, 32, &nuevoTiempo);
-	if (errNum)
+	_time32(&st.tiempoCrudo);//Dame tiempo en seg
+	_localtime32_s(&st.nuevoTiempo, &st.tiempoCrudo);//Convierta el tiempo en forma estructura tm.
+	st.errNum = asctime_s(st.buffer, 32, &st.nuevoTiempo);
+	if (st.errNum)
 	{
-		std::cout << "Error codigo: "<<(int)errNum<<'\n';
+		std::cout << "Error codigo: " << (int)st.errNum << '\n';
 	}
-	std::cout << "Tiempo: "<<buffer<<'\n';
-
-	strAho.palabraABuscar=buscar;
-	strAho.arrayRespuesta[5]={' '};
+	std::cout << "Tiempo: " << st.buffer << '\n';
 }
 
 Ahorcado::~Ahorcado()
 {
 	std::cout << "Destruyendo......... \\ \n";
 	//Tiempo
-	_time32(&tiempoCrudo);//Dame tiempo en seg
-	_localtime32_s(&nuevoTiempo, &tiempoCrudo);//Convierta el tiempo en forma estructura tm.
-	errNum = asctime_s(buffer, 32, &nuevoTiempo);
-	if (errNum)
+	_time32(&st.tiempoCrudo);//Dame tiempo en seg
+	_localtime32_s(&st.nuevoTiempo, &st.tiempoCrudo);//Convierta el tiempo en forma estructura tm.
+	st.errNum = asctime_s(st.buffer, 32, &st.nuevoTiempo);
+	if (st.errNum)
 	{
-		std::cout << "Error codigo: " << (int)errNum << '\n';
+		std::cout << "Error codigo: " << (int)st.errNum << '\n';
 	}
-	std::cout << "Tiempo: " << buffer << '\n';
+	std::cout << "Tiempo: " << st.buffer << '\n';
 }
 void Ahorcado::imprimirPantalla()
 {
-	
-	std::cout << "El tamano de struct eA es " << sizeof(EstructAhorcado) << '\n';
 	std::string dibujoAhorcado[6]{
 		"\n	|	 @ ",
 		"	|    | ",
@@ -121,29 +121,29 @@ void Ahorcado::imprimirPantalla()
 		}
 
 		std::cout << "Intentos: " << intentos << '\n';
-		std::cout << "Letras Elegidas: " << strAho.letrasInsertadas <<" caracteres: "
-			<< strAho.letrasInsertadas.length() <<'\n';
+		std::cout << "Letras Elegidas: " << m_letrasInsertadas << " caracteres: "
+			<< m_letrasInsertadas.length() << '\n';
 
 		std::cout << "La palabra es: ";
 
 		for (size_t k = 0; k < 5; k++)
 		{
-			std::cout << strAho.arrayRespuesta[k];
+			std::cout << m_arrayRespuesta[k];
 			std::cout << ' ';
 		}
-		
+
 		std::cout << "\nIngrese una letra: ";
-		std::cin >> strAho.letra;
+		std::cin >> m_letra;
 		//buscar si ya esta en las letras elegidas
 		//preguntar por mejora?
-		chequeadorLetras(strAho);
-			
+		chequeadorLetras();
+
 		//COMPARA CON EL ARRAY
-		for (size_t i = 0; i < strAho.palabraABuscar.length(); i++)
+		for (size_t i = 0; i < m_palabraABuscar.length(); i++)
 		{
-			if (strAho.palabraABuscar[i] == strAho.letra )
+			if (m_palabraABuscar[i] == m_letra)
 			{
-				strAho.arrayRespuesta[i] = strAho.palabraABuscar[i];
+				m_arrayRespuesta[i] = m_palabraABuscar[i];
 				letraValida = true;
 				victoryPoint++;
 			}
@@ -164,7 +164,7 @@ void Ahorcado::imprimirPantalla()
 			std::cout << "La palabra era: \n";
 			for (size_t i = 0; i < 5; i++)
 			{
-				std::cout << strAho.palabraABuscar[i];
+				std::cout << m_palabraABuscar[i];
 			}
 			std::cin.get();
 			std::cin.get();
@@ -176,7 +176,7 @@ void Ahorcado::imprimirPantalla()
 			gano = true;
 			for (size_t i = 0; i < 5; i++)
 			{
-				std::cout << strAho.palabraABuscar[i];
+				std::cout << m_palabraABuscar[i];
 			}
 			std::cin.get();
 			std::cin.get();
@@ -196,18 +196,31 @@ void Ahorcado::imprimirPantalla()
 		system("cls");
 	} while (!gano);
 }
-void Ahorcado::chequeadorLetras(EstructAhorcado &strAho)
+void Ahorcado::chequeadorLetras()
 {
-	for (size_t i = 0; i < strAho.letrasInsertadas.length(); i++)
+	for (size_t i = 0; i < m_letrasInsertadas.length(); i++)
 	{
-		if (strAho.letrasInsertadas[i] == strAho.letra)
+		if (m_letrasInsertadas[i] == m_letra)
 		{
 			do
 			{
 				std::cout << "Ya lo eligio, elija un nuevo caracter...\n";
-				std::cin >> strAho.letra;
-			} while (strAho.letra == strAho.letrasInsertadas[i]);
+				std::cin >> m_letra;
+			} while (m_letra == m_letrasInsertadas[i]);
 		}
 	}
-	strAho.letrasInsertadas += strAho.letra;
+	m_letrasInsertadas += m_letra;
+};
+
+std::string Ahorcado::GetPalabraBuscar()
+{
+	return m_palabraABuscar;
+};
+char Ahorcado::GetArrayRespuesta() 
+{
+	return m_arrayRespuesta[4];
+};
+char Ahorcado::GetLetra() 
+{
+	return m_letra;
 };
