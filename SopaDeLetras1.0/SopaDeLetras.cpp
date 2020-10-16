@@ -4,31 +4,33 @@
 #include<chrono>
 #include<string>
 #include<vector>
+#include<array>
+#include<fstream>
 //#include<conio2.h>
 /*
 1-array para tablero marcador
-2-array palabras buscadas
 */
 class SopaDeLetras
 {
 private:
-	enum EnumPalabras { CASA, VIDEOJUEGO, PROGRAMACION, DESARROLLO, FACULTAD, LENGUAJE };
 	const static short indX{ 15 };
 	const static short indY{ 20 };
 	char matrizSopa[indX][indY];
 	short matrizNumerosGuia[indX][indY];
-	std::string tablero[5][2];
-	std::vector<EnumPalabras> palabrasBuscadas[6];
+	std::string tablero[6][3];
+	std::array<std::string,6>palabrasBuscadas;
 	std::chrono::system_clock::time_point start;
 	std::string user;
 	bool salir;
 	void Init();
 	void VerSopa();
 	void VerNumeros();
-	void VerTablero(std::string&, float&);
+	void VerTablero();
+	void AsignarValoresTablero(std::string&, float&);
 	void CrearSopa();
 	void CrearNumeros();
 	void CrearTablero();
+	void CrearArchivoTexto();
 	void Menu();
 	std::string FloatToString(float&);
 
@@ -67,16 +69,18 @@ SopaDeLetras::SopaDeLetras()
 	CrearNumeros();
 	CrearSopa();
 	Init();
-
 };
 
 SopaDeLetras::~SopaDeLetras()
 {
+	//Tiempo
 	auto end = std::chrono::system_clock::now();
 	std::chrono::duration<float, std::milli> duration = end - start;
 	float sec = (float)duration.count() / 1000;
 	std::cout << sec << " seg//" << duration.count() << " miliseg\n";
-	VerTablero(user, sec);
+	AsignarValoresTablero(user, sec);
+	VerTablero();
+	CrearArchivoTexto();
 };
 
 void SopaDeLetras::Init()
@@ -86,10 +90,7 @@ void SopaDeLetras::Init()
 	salir = false;
 	user = "Max";
 	short cont(0);
-	for (auto it = std::begin(palabrasBuscadas); it != std::end(palabrasBuscadas); ++it)
-		palabrasBuscadas.push_back(cont++);
-	
-	
+	palabrasBuscadas = {"CASA","VIDEOJUEGO","PROGRAMACION","DESARROLLO", "FAULTAD", "LENGUAJE"};
 	CrearTablero();
 };
 
@@ -114,6 +115,7 @@ void SopaDeLetras::Menu()
 	std::cout << '\n';
 	std::cout << "Presiones las flechas para mover el cursor.\n";
 	std::cout << "Presiones 'Espacio' para seleccionar una letra.\n";
+	
 };
 
 void SopaDeLetras::CrearNumeros()
@@ -141,17 +143,52 @@ void SopaDeLetras::CrearSopa()
 
 void SopaDeLetras::CrearTablero()
 {
-	for (size_t f = 0; f < 5; f++)
+	short contador(0);
+	std::ifstream leer("Score.dat");//leer el archivo
+
+	for (size_t f = 0; f < 6; f++)
 	{
-		for (size_t c = 0; c < 2; c++)
+		for (size_t c = 0; c < 3; c++)
 		{
+			//Posicion
 			if (c == 0)
 			{
-				tablero[f][c] = user;
+				if (f==0)
+				{
+					tablero[f][c] = "Posicion";
+				}
+				else 
+				{
+					tablero[f][c] = std::to_string(++contador)+"	";
+				}
 			}
-			else
+			//Nombre
+			if (c==1)
 			{
-				tablero[f][c] = "sec";
+
+				if (!leer)
+				{
+					std::cerr << "Score.dat no existe!!!\n";
+				}
+				if (f == 0)
+				{
+					tablero[f][c] = "Usuario";
+				}
+				else 
+				{
+					tablero[f][c] = user+"	";
+				}
+			}
+			if(c==2)
+			{
+				if (f == 0)
+				{
+					tablero[f][c] = "Tiempo Transcurrido";
+				}
+				else 
+				{
+					tablero[f][c] = "sec		";
+				}
 			}
 		}
 	}
@@ -188,22 +225,22 @@ void SopaDeLetras::VerSopa()
 			//textcolor(WHITE);
 			break;
 		case 2:
-			std::cout << "			CASA";
+			std::cout << "			"<<palabrasBuscadas[0]<<" ["<<palabrasBuscadas[0].size() << "] ";
 			break;
 		case 3:
-			std::cout << "			VIDEOJUEGO";
+			std::cout << "			" << palabrasBuscadas[1] << " [" << palabrasBuscadas[1].size() << "] ";
 			break;
 		case 4:
-			std::cout << "			PRORAMACION";
+			std::cout << "			" << palabrasBuscadas[2] << " [" << palabrasBuscadas[2].size() << "] ";
 			break;
 		case 5:
-			std::cout << "			DESARROLLO";
+			std::cout << "			" << palabrasBuscadas[3] << " [" << palabrasBuscadas[3].size() << "] ";
 			break;
 		case 6:
-			std::cout << "			FACULTAD";
+			std::cout << "			" << palabrasBuscadas[4] << " [" << palabrasBuscadas[4].size() << "] ";
 			break;
 		case 7:
-			std::cout << "			LENGUAJE";
+			std::cout << "			" << palabrasBuscadas[5] << " [" << palabrasBuscadas[5].size() << "] ";
 			break;
 		default:
 			break;
@@ -213,19 +250,31 @@ void SopaDeLetras::VerSopa()
 	}
 };
 
-void SopaDeLetras::VerTablero(std::string& user, float& sec)
+void SopaDeLetras::VerTablero()
 {
-	for (size_t f = 0; f < 5; f++)
+	for (size_t f = 0; f < 6; f++)
 	{
-		for (size_t c = 0; c < 2; c++)
+		for (size_t c = 0; c < 3; c++)
 		{
-			if (c == 1)
-			{
-				tablero[f][c] = FloatToString(sec);
-			}
-			std::cout << tablero[f][c] << " | ";
+			std::cout << tablero[f][c] << "	| ";
 		}
-		std::cout << '\n';
+		std::cout <<  "\n---------------------------------------------------------\n";
+	}
+};
+void SopaDeLetras::AsignarValoresTablero(std::string& user, float& sec)
+{
+	for (size_t f = 0; f < 6; f++)
+	{
+		for (size_t c = 0; c < 3; c++)
+		{
+			if (c == 2)
+			{
+				if (f!=0)
+				{
+					tablero[f][c] = FloatToString(sec)+"	";
+				}
+			}
+		}
 	}
 };
 
@@ -236,3 +285,17 @@ std::string SopaDeLetras::FloatToString(float& sec)
 	return aux;
 };
 
+void SopaDeLetras::CrearArchivoTexto() 
+{
+	//Manipulacion de Archivos
+	std::ofstream salida{ "Score.dat" };//Escribe el archivo
+	//Dibuja en la hoja
+	for (size_t f = 0; f < 6; f++)
+	{
+		for (size_t c = 0; c < 3; c++)
+		{
+			salida << tablero[f][c] << " || ";
+		}
+		salida << "\n-------------------\n";
+	}
+};

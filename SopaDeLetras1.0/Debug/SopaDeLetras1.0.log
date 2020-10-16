@@ -1,4 +1,4 @@
 ﻿  SopaDeLetras.cpp
-C:\0-Cursos\C++\cppTrabajosVarios\SopaDeLetras1.0\SopaDeLetras.cpp(64,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-C:\0-Cursos\C++\cppTrabajosVarios\SopaDeLetras1.0\SopaDeLetras.cpp(131,45): warning C4244: '=': conversión de 'short' a 'char'; posible pérdida de datos
+C:\0-Cursos\C++\cppTrabajosVarios\SopaDeLetras1.0\SopaDeLetras.cpp(68,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\0-Cursos\C++\cppTrabajosVarios\SopaDeLetras1.0\SopaDeLetras.cpp(139,45): warning C4244: '=': conversión de 'short' a 'char'; posible pérdida de datos
   SopaDeLetras1.0.vcxproj -> C:\0-Cursos\C++\cppTrabajosVarios\SopaDeLetras1.0\Debug\SopaDeLetras1.0.exe
